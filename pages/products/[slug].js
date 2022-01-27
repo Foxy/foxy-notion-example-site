@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   getAllProducts,
   getProductBySlug,
@@ -11,10 +12,11 @@ export default function ProductDetails({ product, otherProducts }) {
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-16">
         <div className="lg:col-span-4">
           <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-            <img
-              className="object-center object-cover"
+            <Image
               src={product.Image.files[0].file.url}
               alt={product.Name.title[0].plain_text}
+              layout="fill"
+              className="object-center object-cover"
             />
           </div>
         </div>
@@ -105,10 +107,11 @@ export default function ProductDetails({ product, otherProducts }) {
               key={product.Slug.rich_text[0].plain_text}
             >
               <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100">
-                <img
-                  className="object-center object-cover group-hover:opacity-75"
+                <Image
                   src={product.Image.files[0].file.url}
                   alt={product.Name.title[0].plain_text}
+                  layout="fill"
+                  className="object-center object-cover group-hover:opacity-75"
                 />
               </div>
               <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900 space-x-8">

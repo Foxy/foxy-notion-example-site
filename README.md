@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# A JAMstack e-commerce site using Next.js, Notion and Foxy
 
-## Getting Started
+Live demo: https://foxy-notion.vercel.app/
 
-First, run the development server:
+## 🛠 Technologies used
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [Next.js](https://nextjs.org/) - Front-end framework
+- [Notion](https://www.notion.so/) - Product database
+- [Foxy](https://foxy.io/) - E-commerce platform
+- [Vercel](https://vercel.com/) - Deployment
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Quick start
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 1. Create a Foxy store
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Sign up or log in your [Foxy](https://admin.foxycart.com/admin) admin account
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. Create a new store or use an existing one. Other settings are optional. The key thing is to have your own Foxy store subdomain
 
-## Learn More
+### 2. Set up a product database in Notion
 
-To learn more about Next.js, take a look at the following resources:
+1. Sign up or log in [Notion](https://www.notion.so/login)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Open [this template](https://bustling-naranja-1d1.notion.site/009d7e02dbe8479fb0bbc80458a5eb0d?v=2f6b23ba9e99493da557cf82ac5210bb) and duplicate the template
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Add your own products
 
-## Deploy on Vercel
+### 3. Create an integration with the Notion database
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Go to https://www.notion.com/my-integrations
+2. Click the "+ New integration" button
+3. Give your integration a name
+4. Select the workspace where the product database exists
+5. Click the "Submit" button to create the integration
+6. The "Internal Integration Token" on the next page would be the `NOTION_TOKEN` environment variable
+7. In the product database, click the "Share" button
+8. Click the input field beside the "Invite" button, which opens a pop-up window to select an integration
+9. Select the integration created in previous steps
+10. Click the "Invite" button
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 4. Get the required environment variables
+
+- `NOTION_TOKEN`
+
+- `NOTION_DATABASE_ID` should be the part of your product database URL after the workspace name and the slash and before the question mark. For example, your product database URL is `https://www.notion.so/myworkspace/a8aec43384f447ed84390e8e42c2e089?v=...`, then the database ID would be `a8aec43384f447ed84390e8e42c2e089`
+
+- `NEXT_PUBLIC_FOXY_SUBDOMAIN` should be the Foxy store subdomain, which can be found in the Foxy admin [Dashboard](https://admin.foxycart.com/admin.php). For exmaple, your store domain is `foxy-demo.foxycart.com`, then the subdomain would be `foxy-demo`
+
+- `FOXY_STORE_SECRET` is required only if you want to enable [Foxy HMAC cart validation](https://wiki.foxycart.com/v/2.0/hmac_validation). To get this variable value, go to [Advanced Settings](https://admin.foxycart.com/admin.php?ThisAction=EditAdvancedFeatures) in the Foxy admin. Look for the "store secret" setting, click the "Show" button, and copy the value in the text box. Also, the "would you like to enable cart validation?" option in the same section needs to be checked
+
+### 5. Deploy to Vercel with one click
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/lrnxie/foxy-contentful-nextjs.git&env=CONTENTFUL_SPACE_ID,CONTENTFUL_ACCESS_TOKEN,NEXT_PUBLIC_FOXY_SUBDOMAIN)
+
+## 🏗 Want to get your hands dirty?
+
+1. Clone this repo: `git clone https://github.com/lrnxie/foxy-notion`
+2. Copy the `.env.example` file to `.env.local`, and set the [variables](#Get-the-required-environment-variables)
+3. Make your changes
+4. Push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/new).
+
+**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.

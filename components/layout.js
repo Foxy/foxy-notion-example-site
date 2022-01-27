@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
+import foxyLogo from "../public/foxy_icon.png";
 
 export default function Layout({ children }) {
   const navLink = [
@@ -29,12 +31,8 @@ export default function Layout({ children }) {
         <nav className="max-w-7xl mx-auto py-2 px-4 border-b sm:px-6 lg:px-8">
           <div className="flex items-center justify-between text-sm text-gray-800">
             <Link href="/">
-              <a className="py-1">
-                <img
-                  className="h-full w-8 object-scale-down"
-                  src="/foxy_icon.png"
-                  alt="Foxy Logo"
-                />
+              <a>
+                <Image src={foxyLogo} alt="Foxy Logo" width={32} height={42} />
               </a>
             </Link>
 

@@ -29,13 +29,7 @@ export default function Contact() {
         </div>
 
         <div className="mt-8 lg:col-span-4">
-          <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-            <img
-              className="object-center object-cover"
-              src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/c1dc8da1-3f9a-4094-aa05-908fa84cec2f/white_mug.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211215%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211215T192246Z&X-Amz-Expires=3600&X-Amz-Signature=74412c8088ab9116f0288c4785efdcd9564961fca45b8111d2641563a03fe0ba&X-Amz-SignedHeaders=host&x-id=GetObject"
-              alt=""
-            />
-          </div>
+          <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8"></div>
         </div>
       </div>
     </div>
