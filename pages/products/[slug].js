@@ -32,9 +32,7 @@ export default function ProductDetails({ product, otherProducts }) {
             </div>
           </div>
           <p className="text-gray-500 mt-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa sequi
-            omnis beatae. Enim modi, facilis dolores, magni ab neque earum atque
-            sed excepturi ad ipsam ratione laborum possimus natus vel!
+            {product.Description.rich_text[0].plain_text}
           </p>
 
           <form
