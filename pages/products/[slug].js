@@ -5,15 +5,20 @@ import {
   getProductBySlug,
   getOtherProducts,
 } from "../../lib/notion";
+import { getFoxyForm } from "../../lib/foxy-signer";
 
-export default function ProductDetails({ product, otherProducts }) {
+export default function ProductDetails({ product, foxyForm, otherProducts }) {
   return (
     <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-16">
         <div className="lg:col-span-4">
           <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
             <Image
-              src={product.Image.files[0].file.url}
+              src={
+                product["Image URL"].url
+                  ? product["Image URL"].url
+                  : product.Image.files[0].file.url
+              }
               alt={product.Name.title[0].plain_text}
               layout="fill"
               className="object-center object-cover"
@@ -35,55 +40,13 @@ export default function ProductDetails({ product, otherProducts }) {
             {product.Description.rich_text[0].plain_text}
           </p>
 
-          <form
-            action={`https://${process.env.NEXT_PUBLIC_FOXY_SUBDOMAIN}.foxycart.com/cart`}
-            method="POST"
-            className="mt-10 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2"
-          >
-            <input
-              type="hidden"
-              name="name"
-              value={product.Name.title[0].plain_text}
-            />
-            <input type="hidden" name="price" value={product.Price.number} />
-            <input
-              type="hidden"
-              name="quantity_max"
-              value={product.Inventory.number}
-            />
-            <input
-              type="hidden"
-              name="image"
-              value={product.Image.files[0].file.url}
-            />
-            <input
-              type="hidden"
-              name="code"
-              value={product.Slug.rich_text[0].plain_text}
-            />
+          <div dangerouslySetInnerHTML={{ __html: foxyForm }}></div>
 
-            <input
-              type="number"
-              name="quantity"
-              defaultValue="1"
-              min="1"
-              max={product.Inventory.number}
-              placeholder="Quantity"
-              className="border rounded-md py-3 px-6"
-            />
-            <button
-              type="submit"
-              className="w-full bg-gray-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
-            >
-              Add to Bag
-            </button>
-
-            {product.Inventory.number < 5 && (
-              <p className="text-red-600">
-                Only {product.Inventory.number} left!
-              </p>
-            )}
-          </form>
+          {product.Inventory.number < 5 && (
+            <p className="text-red-600 mt-2">
+              Only {product.Inventory.number} left!
+            </p>
+          )}
         </div>
       </div>
 
@@ -106,7 +69,11 @@ export default function ProductDetails({ product, otherProducts }) {
             >
               <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100">
                 <Image
-                  src={product.Image.files[0].file.url}
+                  src={
+                    product["Image URL"].url
+                      ? product["Image URL"].url
+                      : product.Image.files[0].file.url
+                  }
                   alt={product.Name.title[0].plain_text}
                   layout="fill"
                   className="object-center object-cover group-hover:opacity-75"
@@ -146,6 +113,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       product: product[0].properties,
+      foxyForm: getFoxyForm(product[0].properties),
       otherProducts: otherProducts.map((product) => product.properties),
     },
   };

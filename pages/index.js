@@ -37,7 +37,11 @@ export default function Home({ products }) {
               <a>
                 <div className="group w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                   <Image
-                    src={product.Image.files[0].file.url}
+                    src={
+                      product["Image URL"].url
+                        ? product["Image URL"].url
+                        : product.Image.files[0].file.url
+                    }
                     alt={product.Name.title[0].plain_text}
                     layout="fill"
                     className="object-center object-cover group-hover:opacity-75"

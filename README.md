@@ -50,11 +50,9 @@ Live demo: https://foxy-notion.vercel.app/
 
 ### 5. Deploy to Vercel with one click
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/lrnxie/foxy-contentful-nextjs.git&env=CONTENTFUL_SPACE_ID,CONTENTFUL_ACCESS_TOKEN,NEXT_PUBLIC_FOXY_SUBDOMAIN)
-
 ## 🏗 Want to get your hands dirty?
 
-1. Clone this repo: `git clone https://github.com/lrnxie/foxy-notion`
+1. Clone this repo: `git clone https://github.com/Foxy/foxy-notion-example-site`
 2. Copy the `.env.example` file to `.env.local`, and set the [variables](#4.-Get-the-required-environment-variables)
 3. Make your changes
 4. Push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/new).
