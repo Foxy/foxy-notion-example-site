@@ -1,5 +1,5 @@
 {
-  "name": "foxy-notion",
+  "name": "foxy-notion-example-site",
   "private": true,
   "scripts": {
     "dev": "next dev",
